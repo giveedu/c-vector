@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct __c_mem_pool {
+	void* current;
+	void* end;
+} mem_pool_t;
 
 typedef struct _c_vector_item {
 	size_t size;
@@ -11,7 +15,10 @@ typedef struct _c_vector_item {
 } c_vector_item_t;
 
 typedef struct _c_vector {
-	
+	mem_pool_t* memory;
+	size_t len;
+	size_t cap;
+	c_vector_item_t* items;
 } c_vector_t;
 
 #endif
