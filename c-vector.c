@@ -39,6 +39,17 @@ mem_pool_create(size_t size)
 #define VEC_ITEM_START 20
 #endif
 
+static inline void
+_c_vector_expand(c_vector_t* vec)
+{
+#ifdef C_VEC_EXPAND_2X
+	vec->cap *= 2;
+#else
+	vec->cap *= (vec->cap);
+#endif // C_VEC_EXPAND_2X
+	vec->items = realloc(vec->items, vec->cap);
+}
+
 /*PUBLIC API*/
 extern c_vector_t* c_vector_new(void)
 {
