@@ -28,6 +28,8 @@ extern c_vector_t* c_vector_new(void);
 /*PUBLIC API*/
 extern void c_vector_push(c_vector_t* vec, void* item, size_t item_size);
 /*PUBLIC API*/
+extern void* c_vector_at(c_vector_t* vec, size_t index);
+/*PUBLIC API*/
 extern void c_vector_del(c_vector_t* vec);
 
 #endif

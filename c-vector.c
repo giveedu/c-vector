@@ -78,6 +78,11 @@ extern void c_vector_push(c_vector_t* vec, void* item, size_t item_size)
 	vec->len++;
 }
 
+extern void* c_vector_at(c_vector_t* vec, size_t index)
+{
+	return (index < vec->len ? vec->items[index].data : NULL);
+}
+
 extern void c_vector_del(c_vector_t* vec)
 {
 	MEM_POOL_DESTROY(vec->memory);
