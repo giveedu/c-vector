@@ -50,7 +50,12 @@ _c_vector_expand(c_vector_t* vec)
 	vec->items = realloc(vec->items, vec->cap);
 }
 
-/*PUBLIC API*/
+static inline int
+_c_vector_is_full(c_vector_t* vec)
+{
+	return vec->len == vec->cap;
+}
+
 extern c_vector_t* c_vector_new(void)
 {
 	c_vector_t* vec = malloc(sizeof(struct _c_vector));
@@ -59,6 +64,18 @@ extern c_vector_t* c_vector_new(void)
 	vec->len = 0;
 	vec->cap = VEC_ITEM_START;
 	return vec;
+}
+
+extern void c_vector_push(c_vector_t* vec, void* item, size_t item_size)
+{
+	c_vector_item_t* pushed;
+	if(_c_vector_is_full(vec))
+		_c_vector_expand(vec);
+	pushed = vec->items + vec->len;
+	pushed->size = item_size;
+	MEM_POOL_ALLOC(pushed->data, vec->memory, item_size);
+	memcpy(pushed->data, item, item_size);
+	vec->len++;
 }
 
 extern void c_vector_del(c_vector_t* vec)
