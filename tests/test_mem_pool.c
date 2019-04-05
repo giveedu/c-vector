@@ -36,7 +36,7 @@ static void test_mem_pool_alloc2(void)
 	MEM_POOL_ALLOC(chunk, pool, 70);
 	after = MEM_POOL_SPACE(pool);
 	TEST_CHECK_POINT(before == 50);
-	TEST_CHECK_POINT(after == 45);
+	TEST_CHECK_POINT(after > (70 * 70));
 	free(pool);
 }
 
@@ -45,5 +45,6 @@ int main(int argc, char const *argv[])
 {
 	test_mem_pool_create();
 	test_mem_pool_alloc1();
+	test_mem_pool_alloc2();
 	return 0;
 }

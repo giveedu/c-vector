@@ -22,7 +22,7 @@ mem_pool_create(size_t size)
 		size_t cur_occ = pool->size - sizeof(struct __c_mem_pool); \
 		pool = realloc(pool, new_size); \
 		pool->size = new_size; \
-		pool->current = pool + cur_occ; \
+		pool->current = pool + cur_occ + bsize; \
 		pool->end = pool->current + new_size;\
 	} \
 	block = pool->current; \
