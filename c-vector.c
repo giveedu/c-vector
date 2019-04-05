@@ -78,6 +78,18 @@ extern void c_vector_push(c_vector_t* vec, void* item, size_t item_size)
 	vec->len++;
 }
 
+extern void* c_vector_pop(c_vector_t* vec)
+{
+	c_vector_item_t* popped;
+	if(vec->len) {
+		popped = vec->items[(vec->len - 1)].data;
+		vec->len--;
+	} else {
+		popped = NULL;
+	}
+	return popped;
+}
+
 extern void* c_vector_at(c_vector_t* vec, size_t index)
 {
 	return (index < vec->len ? vec->items[index].data : NULL);
